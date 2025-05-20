@@ -159,12 +159,9 @@ const serviceContent: Record<string, {
   }
 };
 
-type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default async function ServicePage({ params, searchParams }: Props) {
+export default async function ServicePage(
+  { params }: { params: { slug: string } }
+) {
   // Using async function as recommended by Next.js for dynamic route handlers
   const { slug } = params;
   
