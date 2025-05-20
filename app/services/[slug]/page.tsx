@@ -7,7 +7,7 @@ import { getServiceContent, ServiceContent } from "@/utils/markdown";
 import { Suspense } from "react";
 
 // Helper function to generate slugs consistently
-export function generateSlug(title: string): string {
+function generateSlug(title: string): string {
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
@@ -159,11 +159,12 @@ const serviceContent: Record<string, {
   }
 };
 
-export default async function ServicePage({
-  params,
-}: {
+type Props = {
   params: { slug: string };
-}) {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function ServicePage({ params, searchParams }: Props) {
   // Using async function as recommended by Next.js for dynamic route handlers
   const { slug } = params;
   
