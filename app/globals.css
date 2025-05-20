@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Remove testimonials from services pages */
+body:has(.services-layout-wrapper) .pt-10.pb-20.flex.flex-col.items-center.justify-center.relative.mb-20.w-full,
+body:has(.services-layout-wrapper) .relative.flex.flex-col.items-center {
+  display: none !important;
+}
+
+/* Target specific testimonial images */
+img[alt="Kazuo Tanaka"],
+img[alt="Sarah Chen"],
+img[alt*="testimonial"] {
+  display: none !important;
+}
+
+/* Hide entire testimonial containers by finding ancestors */
+img[alt="Kazuo Tanaka"]:not([hidden]),
+img[alt="Sarah Chen"]:not([hidden]) {
+  display: none !important;
+}
+
+/* Target the closest parent container */
+div:has(> div > img[alt="Kazuo Tanaka"]),
+div:has(> div > img[alt="Sarah Chen"]) {
+  display: none !important;
+}
+
+/* Alternative selector targeting the actual testimonial components */
+body:has(.services-layout-wrapper) [data-component-name="<div />"] .rounded-full img[alt="Kazuo Tanaka"],
+body:has(.services-layout-wrapper) [data-component-name="<div />"] .rounded-full img[alt="Sarah Chen"],
+body:has(.services-layout-wrapper) blockquote[data-component-name="<blockquote />"] {
+  display: none !important;
+}
+
+/* Hide parent containers of testimonials */
+body:has(.services-layout-wrapper) [data-component-name="<div />"] .rounded-full img[alt="Kazuo Tanaka"]:not(:empty):not(:has(*)) {
+  display: none !important;
+}

@@ -1,0 +1,5 @@
+/* CSS to hide testimonials on services pages */
+.services-layout-wrapper .relative.flex.flex-col.items-center,
+.services-layout-wrapper .pt-10.pb-20.flex.flex-col.items-center.justify-center.relative.mb-20.w-full {
+  display: none !important;
+}
