@@ -46,7 +46,7 @@ export const Services = ({ dict, locale }: { dict: any; locale: string }) => {
             {services
               .filter((service) => service.category === category.id)
               .map((service, idx) => (
-                <Service key={`service-${category.id}-${idx}`} service={service} />
+                <Service key={`service-${category.id}-${idx}`} service={service} prefix={prefix} dict={dict} />
               ))}
           </ul>
         </div>
@@ -55,7 +55,7 @@ export const Services = ({ dict, locale }: { dict: any; locale: string }) => {
   );
 };
 
-const Service = ({ service }: any) => {
+const Service = ({ service, prefix, dict }: { service: any; prefix: string; dict: any }) => {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
 
