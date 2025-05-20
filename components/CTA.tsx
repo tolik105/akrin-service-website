@@ -1,7 +1,7 @@
 import React from "react";
 import { BlurImage } from "./BlurImage";
 
-export const CallToAction = ({ headerText, bodyText }: any) => {
+export const CallToAction = ({ headerText, bodyText, buttonText, locale = 'en' }: any) => {
   return (
     <div className="relative rounded-2xl bg-slate-800   mb-20 mt-20 text-gray-100 max-w-6xl  xl:mx-auto min-h-96 h-full  overflow-hidden pb-4">
       <div
@@ -26,10 +26,10 @@ export const CallToAction = ({ headerText, bodyText }: any) => {
 
           <div className="flex justify-center">
             <a
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex justify-center rounded-lg text-sm font-semibold py-3 px-4 bg-white/0 text-white ring-1 ring-slate-100 hover:bg-white/25 hover:ring-slate-900/15 mx-auto"
             >
-              Contact Us
+              {buttonText || 'Contact Us'}
             </a>
           </div>
         </div>

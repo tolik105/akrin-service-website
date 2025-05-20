@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { NavbarWithHoverEffects } from "@/components/ui/navbar-with-hover-effects";
+import { getDictionary } from "@/lib/i18n";
 import { Footer } from "@/components/Footer";
 import ClientOnly from "@/components/ClientOnly";
 import CookieConsent from "@/components/CookieConsent";
@@ -35,10 +36,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const dict = getDictionary('en');
   return (
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
       <body className={cn("bg-white antialiased h-full w-full font-sans")}>
-        <NavbarWithHoverEffects />
+        <NavbarWithHoverEffects dict={dict} locale="en" />
         {children}
         <Footer />
         <ClientOnly>

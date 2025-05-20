@@ -13,7 +13,8 @@ function generateSlug(title: string): string {
     .replace(/\s+/g, "-");
 }
 
-export const Services = () => {
+export const Services = ({ dict, locale }: { dict: any; locale: string }) => {
+  const prefix = locale === 'en' ? '' : `/${locale}`;
   return (
     <div
       id="services"
@@ -21,10 +22,10 @@ export const Services = () => {
     >
       <div className="mx-auto max-w-3xl sm:text-center pb-10">
         <h2 className="text-3xl font-medium tracking-tight text-gray-900">
-          IT Services That Solve Real Business Problems
+          {dict.services.heading}
         </h2>
         <p className="mt-2 text-lg text-gray-600">
-          Our bilingual team provides comprehensive IT solutions for global organizations operating in Japan.
+          {dict.services.subheading}
         </p>
       </div>
 
@@ -79,12 +80,12 @@ const Service = ({ service }: any) => {
           {service.description}
         </p>
         <div className="flex justify-center mt-6">
-          <Link 
-            href={`/services/${generateSlug(service.title)}`}
+          <Link
+            href={`${prefix}/services/${generateSlug(service.title)}`}
             className="relative px-0.5 py-1 text-zinc-600 text-sm rounded-full font-semibold bg-gradient-to-br from-zinc-700 to-zinc-900 hover:shadow-md hover:shadow-zinc-500/30 transition duration-200"
           >
             <span className="w-24 h-10 flex items-center justify-center bg-zinc-100 rounded-full mx-0.5">
-              Learn More
+              {dict.services.learnMore}
             </span>
           </Link>
         </div>
