@@ -2,22 +2,22 @@ import React from "react";
 import { MdOutlineDesignServices, MdMonitor, MdCloud, MdShield } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
 import { IoIosPeople } from "react-icons/io";
-const HeroFeatures = () => {
+const HeroFeatures = ({ dict }: { dict: any }) => {
   return (
     <div className=" w-full relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto mb-20 px-2 md:px-8">
       <Card
-        title={`Managed Infrastructure & 24/7 Monitoring`}
-        description={`Proactive monitoring, patching, and incident response powered by NinjaOne.`}
+        title={dict.hero.features1Title}
+        description={dict.hero.features1Desc}
         icon={<MdMonitor className="h-4 w-4 text-zinc-700" />}
       />
       <Card
-        title={`Seamless Cloud & Server Migrations`}
-        description={`Zero-downtime moves to Microsoft 365, Azure, AWS, or on-prem refreshes.`}
+        title={dict.hero.features2Title}
+        description={dict.hero.features2Desc}
         icon={<MdCloud className="h-4 w-4 text-zinc-700" />}
       />
       <Card
-        title={`Network & Security Expertise`}
-        description={`Cisco deployments, Zscaler & Sophos hardening, Veritas backup & DR.`}
+        title={dict.hero.features3Title}
+        description={dict.hero.features3Desc}
         icon={<MdShield className="h-4 w-4 text-zinc-700" />}
       />
     </div>

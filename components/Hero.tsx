@@ -7,7 +7,7 @@ import HeroFeatures from "./HeroFeatures";
 
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 
-const Hero = () => {
+const Hero = ({ dict }: { dict: any }) => {
   return (
     <div className="relative pb-10 flex flex-col items-center justify-center  md:px-8 overflow-hidden">
       <div className="relative flex flex-col items-center justify-center mt-10">
@@ -15,22 +15,22 @@ const Hero = () => {
         <div className="mb-14">
           <TypewriterEffectSmooth
             words={[
-              { text: "Bilingual IT Operations" },
-              { 
-                text: "& Cybersecurity",
+              { text: dict.hero.line1 },
+              {
+                text: dict.hero.line2,
                 className: "relative bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-500 z-10"
               },
-              { text: "for Global Teams in Japan" }
+              { text: dict.hero.line3 }
             ]}
             className="text-3xl md:text-5xl font-bold relative text-center text-zinc-700"
             cursorClassName="bg-zinc-700"
           />
         </div>
         <h2 className="relative font-regular text-base text-zinc-500 tracking-wide mb-20 text-center max-w-3xl mx-auto antialiased">
-          Automation-ready, 24 × 7 — pilot our AI help-desk beta. From bilingual on-site engineering to zero-downtime Microsoft 365 / Azure migrations and enterprise-grade security hardening—Akrin handles the stack so you can focus on the business.
+          {dict.hero.subheading}
         </h2>
       </div>
-      <HeroFeatures />
+      <HeroFeatures dict={dict} />
       <div className="flex flex-col sm:flex-row gap-4 mb-12">
         {/* Primary CTA */}
         <button className="relative z-10 group">
@@ -39,7 +39,7 @@ const Hero = () => {
             className="relative z-10 px-6 py-3 bg-white text-zinc-700 font-bold rounded-lg block"
             href="#contact"
           >
-            Book a 15-min Discovery Call
+            {dict.hero.ctaPrimary}
           </a>
         </button>
         
@@ -50,7 +50,7 @@ const Hero = () => {
             className="relative z-10 px-6 py-3 bg-white/95 text-zinc-700 font-medium rounded-lg block border border-zinc-200"
             href="#beta"
           >
-            Join AI Help-Desk Beta
+            {dict.hero.ctaSecondary}
           </a>
         </button>
       </div>
