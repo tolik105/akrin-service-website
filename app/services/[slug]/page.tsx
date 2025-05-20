@@ -163,7 +163,8 @@ export default async function ServicePage(
   { params }: { params: { slug: string } }
 ) {
   // Using async function as recommended by Next.js for dynamic route handlers
-  const { slug } = params;
+  const resolvedParams = await Promise.resolve(params);
+  const { slug } = resolvedParams;
   
   const service = services.find(
     (service) => generateSlug(service.title) === slug
