@@ -1,18 +1,14 @@
-import { services } from "../../constants/services";
+import { services } from "../../../constants/services";
 import React from "react";
 import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
 
-// Helper function to generate slugs consistently (same as in [slug]/page.tsx)
 function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-");
+  return title.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
 }
 
-export default function ServicesPage() {
-  const dict = getDictionary('en');
+export default function ServicesPageJa() {
+  const dict = getDictionary('ja');
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-16">
@@ -23,11 +19,10 @@ export default function ServicesPage() {
           {dict.services.pageSubheading}
         </p>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service) => (
           <Link
-            href={`/en/services/${generateSlug(service.title)}`}
+            href={`/ja/services/${generateSlug(service.title)}`}
             key={service.id}
             className="bg-white border border-zinc-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200"
           >

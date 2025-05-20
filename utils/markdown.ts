@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-const contentDirectory = path.join(process.cwd(), 'contnet');
+const contentDirectory = path.join(process.cwd(), 'content');
 
 export interface ServiceContent {
   contentHtml: string;

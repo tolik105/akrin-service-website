@@ -7,34 +7,41 @@ import Link from "next/link";
 import React, { useState } from "react";
 import LogoWithText from "../LogoWithText";
 
-export function NavbarWithHoverEffects() {
+export function NavbarWithHoverEffects({
+  dict,
+  locale,
+}: {
+  dict: any;
+  locale: string;
+}) {
   return (
     <div className="w-full px-4 py-4 bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto">
-        <Navbar />
+        <Navbar dict={dict} locale={locale} />
       </div>
     </div>
   );
 }
 
-const Navbar = () => {
+const Navbar = ({ dict, locale }: { dict: any; locale: string }) => {
+  const prefix = locale === 'en' ? '' : `/${locale}`;
   const navItems = [
-    { name: "Home", link: "/" },
-    { name: "Services", link: "/#services" },
-    { name: "Why US", link: "/packages" },
-    { name: "About Us", link: "/solutions" },
-    { name: "Blog", link: "/blog" },
+    { name: dict.nav.home, link: `${prefix}/` },
+    { name: dict.nav.services, link: `${prefix}/#services` },
+    { name: dict.nav.whyUs, link: `${prefix}/packages` },
+    { name: dict.nav.about, link: `${prefix}/solutions` },
+    { name: dict.nav.blog, link: `${prefix}/blog` },
   ];
 
   return (
     <div className="rounded-full bg-white border border-gray-100 shadow-sm py-2 px-6">
-      <DesktopNav navItems={navItems} />
-      <MobileNav navItems={navItems} />
+      <DesktopNav navItems={navItems} prefix={prefix} dict={dict} locale={locale} />
+      <MobileNav navItems={navItems} prefix={prefix} dict={dict} locale={locale} />
     </div>
   );
 };
 
-const DesktopNav = ({ navItems }: any) => {
+const DesktopNav = ({ navItems, prefix, dict, locale }: any) => {
   const [hovered, setHovered] = useState<number | null>(null);
   return (
     <div className="flex items-center justify-between w-full">
@@ -68,18 +75,21 @@ const DesktopNav = ({ navItems }: any) => {
           </Link>
         ))}
       </div>
-      <Link
-        href="/contact"
-        className="flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-400 px-6 py-2.5 font-medium text-white hover:shadow-lg hover:brightness-110 transition-all"
-      >
-        Contact
-      </Link>
+      <div className="flex items-center space-x-4">
+        <Link
+          href={`${prefix}/contact`}
+          className="flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-400 px-6 py-2.5 font-medium text-white hover:shadow-lg hover:brightness-110 transition-all"
+        >
+          {dict.nav.contact}
+        </Link>
+        <LanguageSwitcher locale={locale} />
+      </div>
       </motion.div>
     </div>
   );
 };
 
-const MobileNav = ({ navItems }: any) => {
+const MobileNav = ({ navItems, prefix, dict, locale }: any) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -123,15 +133,29 @@ const MobileNav = ({ navItems }: any) => {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href={`${prefix}/contact`}
                 className="w-full rounded-full bg-gradient-to-br from-blue-600 to-blue-400 px-8 py-2.5 font-medium text-white hover:shadow-lg hover:brightness-110 transition-all text-center"
               >
-                Contact
+                {dict.nav.contact}
               </Link>
+              <LanguageSwitcher locale={locale} />
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
     </>
+  );
+};
+
+const LanguageSwitcher = ({ locale }: { locale: string }) => {
+  const other = locale === 'ja' ? 'en' : 'ja';
+  const label = locale === 'ja' ? 'EN' : 'JA';
+  return (
+    <Link
+      href={`/${other}`}
+      className="text-sm text-zinc-600 hover:text-blue-600"
+    >
+      {label}
+    </Link>
   );
 };
