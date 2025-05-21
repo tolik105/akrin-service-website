@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- A letter - teal gradient -->
+  <path d="M159.5 25C173.5 25 329 190 329 190H40C40 190 145.5 25 159.5 25Z" fill="url(#paint0_linear)"/>
+  <!-- Triangle cutout -->
+  <path d="M168 80L205 140H130L168 80Z" fill="white"/>
+  <!-- krin text -->
+  <path d="M343 58V170H371V125L405 95L453 170H490L423 72L478 35H440L371 90V35H343V58Z" fill="#1E1E1E"/>
+  <path d="M503 58V170H530V35H503V58Z" fill="#1E1E1E"/>
+  <path d="M550 58V170H577V105H597C607 105 615 97 615 87V58C615 45 605 35 590 35H550V58ZM577 58H590C594 58 597 61 597 65V80C597 84 594 87 590 87H577V58Z" fill="#1E1E1E"/>
+  <circle cx="528" cy="20" r="15" fill="#1E1E1E"/>
+  <!-- Define the gradient -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="40" y1="190" x2="329" y2="25" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stopColor="#0A4D68"/>
+      <stop offset="0.5" stopColor="#088395"/>
+      <stop offset="1" stopColor="#05BFDB"/>
+    </linearGradient>
+  </defs>
+</svg>

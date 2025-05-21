@@ -135,10 +135,9 @@ export const TypewriterEffectSmooth = ({
   if (isComplete) {
     return (
       <div className={cn("flex items-center space-x-1 my-6", className)}>
-        <div className="overflow-visible">
+        <div className="overflow-visible w-full">
           <div 
-            className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold"
-            style={{ whiteSpace: "nowrap" }}
+            className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold text-center flex flex-wrap justify-center md:flex-nowrap"
           >
             {words.map((word, idx) => (
               <React.Fragment key={`word-${idx}`}>
@@ -161,10 +160,9 @@ export const TypewriterEffectSmooth = ({
   // Show the typing animation
   return (
     <div className={cn("flex items-center space-x-1 my-6", className)}>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden w-full">
         <div 
-          className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold"
-          style={{ whiteSpace: "nowrap" }}
+          className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold text-center flex flex-wrap justify-center md:flex-nowrap"
         >
           {/* Show completed words */}
           {words.map((word, idx) => {

@@ -5,9 +5,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { getServiceContent, ServiceContent } from "@/utils/markdown";
 import { Suspense } from "react";
+import { Metadata, ResolvingMetadata } from "next";
 
 // Helper function to generate slugs consistently
 function generateSlug(title: string): string {
+  // Map service titles to optimized SEO slugs
+  const seoSlugs: Record<string, string> = {
+    "24/7 Help-Desk (JP/EN)": "bilingual-helpdesk-support-247",
+    "Same-Day Onsite Response": "same-day-onsite-it-support",
+    "Multi-Layer Security Shield": "multi-layer-cybersecurity-protection",
+    "Bilingual IT Strategy": "bilingual-it-strategy-consulting-japan",
+    "Office Cabling & Wi-Fi Roll-outs": "enterprise-wifi-network-cabling",
+    "Lifecycle Equipment Management": "it-equipment-lifecycle-management",
+    "Preventive Maintenance Program": "proactive-it-maintenance-services",
+    "Enterprise Network Design": "enterprise-network-design-infrastructure",
+    "Japanese/English Support Desk": "bilingual-it-support-japan",
+    "Zero-Downtime Office Moves": "zero-downtime-office-relocation",
+    "Secure Data Destruction": "secure-data-destruction-compliance",
+    "Hardware Procurement & Setup": "hardware-procurement-setup-services",
+    "Legacy System Modernization": "legacy-system-modernization-upgrade",
+    "Hybrid-Cloud Migration": "hybrid-cloud-migration-services",
+    // Add more mappings for other services
+  };
+  
+  // If we have a custom SEO slug, use it
+  if (seoSlugs[title]) {
+    return seoSlugs[title];
+  }
+  
+  // Otherwise, fall back to the original slug generation logic
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
@@ -163,7 +189,8 @@ export default async function ServicePage(
   { params }: { params: { slug: string } }
 ) {
   // Using async function as recommended by Next.js for dynamic route handlers
-  const { slug } = params;
+  const resolvedParams = await Promise.resolve(params);
+  const { slug } = resolvedParams;
   
   const service = services.find(
     (service) => generateSlug(service.title) === slug
@@ -175,6 +202,7 @@ export default async function ServicePage(
   
   // Try to get markdown content based on mapping
   const markdownMapping: Record<string, string> = {
+    // Original mappings
     "it-security": "it_security",
     "managed-it-services": "service_desk_services",
     "cloud-services": "cloud_services",
@@ -197,7 +225,23 @@ export default async function ServicePage(
     "it-equipment-services": "it_equipment_services",
     "relocation-service": "relocation_service",
     "citrix-workspace-services": "citrix_workspace_services",
-    "fluke-testing-and-survey": "fluke_tester_survey"
+    "fluke-testing-and-survey": "fluke_tester_survey",
+    
+    // New SEO-friendly mappings
+    "bilingual-helpdesk-support-247": "247_help_desk_jpen",
+    "same-day-onsite-it-support": "onsite_support",
+    "multi-layer-cybersecurity-protection": "multi_layer_security_shield",
+    "bilingual-it-strategy-consulting-japan": "bilingual_it_strategy",
+    "enterprise-wifi-network-cabling": "office_cabling_wifi_rollouts",
+    "it-equipment-lifecycle-management": "lifecycle_equipment_management",
+    "proactive-it-maintenance-services": "preventive_maintenance_program",
+    "enterprise-network-design-infrastructure": "enterprise_network_design",
+    "bilingual-it-support-japan": "service_desk_services",
+    "zero-downtime-office-relocation": "zero_downtime_office_moves",
+    "secure-data-destruction-compliance": "secure_data_destruction",
+    "hardware-procurement-setup-services": "it_equipment_services",
+    "legacy-system-modernization-upgrade": "hardware_software_migrations",
+    "hybrid-cloud-migration-services": "cloud_services",
   };
 
   // Get markdown content if available
@@ -452,4 +496,58 @@ export default async function ServicePage(
       </div>
     </div>
   );
+}
+
+// Generate metadata for SEO
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // Resolve params to ensure they're properly awaited
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams.slug;
+  
+  // Get the service data by slug
+  const service = services.find(
+    (service) => generateSlug(service.title) === slug
+  );
+
+  if (!service) {
+    return {
+      title: 'Service Not Found',
+    };
+  }
+
+  // Map specific services to SEO-optimized descriptions
+  const seoDescriptions: Record<string, string> = {
+    "bilingual-helpdesk-support-247": "24/7 bilingual IT support in Japanese and English for businesses in Japan. Enhance productivity with round-the-clock technical assistance.",
+    "multi-layer-cybersecurity-protection": "Comprehensive cybersecurity protection with multiple defense layers against ransomware, phishing, and network intrusions for Japanese businesses.",
+    "enterprise-wifi-network-cabling": "Professional Wi-Fi and network cabling solutions for offices in Japan. Eliminate dead zones and ensure reliable connectivity throughout your workspace.",
+    "it-equipment-lifecycle-management": "Strategic IT asset management from procurement to retirement. Prevent costly emergency upgrades with proactive technology lifecycle planning.",
+    "proactive-it-maintenance-services": "Prevent IT issues before they impact operations with our comprehensive preventive maintenance program. Extend equipment life and reduce downtime.",
+    "enterprise-network-design-infrastructure": "Custom-built network architecture design that eliminates bottlenecks and scales with your business growth. Enterprise-grade solutions for Japanese companies.",
+    "zero-downtime-office-relocation": "Relocate your entire IT infrastructure with zero business disruption. Weekend moves with Monday-ready systems for companies in Japan.",
+    "secure-data-destruction-compliance": "Guaranteed data elimination with certified compliance documentation. Meet stringent Japanese regulatory requirements for secure information disposal.",
+  };
+
+  // Get custom description or fall back to service description
+  const description = seoDescriptions[slug] || service.description;
+
+  // Build metadata
+  return {
+    title: `${service.title} | IT Services in Japan`,
+    description: description,
+    openGraph: {
+      title: `${service.title} | Professional IT Services for Businesses in Japan`,
+      description: description,
+      type: 'website',
+      locale: 'en_US',
+      siteName: 'Akrin IT Services',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: service.title,
+      description: description,
+    },
+  };
 }

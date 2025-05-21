@@ -13,18 +13,12 @@ const Hero = ({ dict }: { dict: any }) => {
       <div className="relative flex flex-col items-center justify-center mt-10">
         {/* Logo removed as requested */}
         <div className="mb-14">
-          <TypewriterEffectSmooth
-            words={[
-              { text: dict.hero.line1 },
-              {
-                text: dict.hero.line2,
-                className: "relative bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-500 z-10"
-              },
-              { text: dict.hero.line3 }
-            ]}
-            className="text-3xl md:text-5xl font-bold relative text-center text-zinc-700"
-            cursorClassName="bg-zinc-700"
-          />
+          <div className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold text-center text-zinc-700 px-4 flex flex-col md:flex-row md:items-center md:justify-center gap-2 flex-wrap">
+            <span>{dict.hero.line1}</span>
+            <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-500 z-10">{dict.hero.line2}</span>
+            <span>{dict.hero.line3}</span>
+            <span className="block rounded-sm w-[4px] h-4 sm:h-6 xl:h-12 animate-pulse bg-zinc-700 hidden md:inline-block"></span>
+          </div>
         </div>
         <h2 className="relative font-regular text-base text-zinc-500 tracking-wide mb-20 text-center max-w-3xl mx-auto antialiased">
           {dict.hero.subheading}

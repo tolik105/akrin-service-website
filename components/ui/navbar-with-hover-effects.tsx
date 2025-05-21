@@ -51,9 +51,9 @@ const DesktopNav = ({ navItems, prefix, dict, locale }: any) => {
         }}
         className="hidden lg:flex w-full items-center justify-between"
       >
-      <Link href="/" className="flex items-center space-x-2">
-        <LogoWithText />
-      </Link>
+      <div className="flex items-center space-x-2">
+        <LogoWithText withLink={true} />
+      </div>
       <div className="flex-1 flex items-center justify-center space-x-14">
         {navItems.map((navItem: any, idx: number) => (
           <Link
@@ -78,7 +78,7 @@ const DesktopNav = ({ navItems, prefix, dict, locale }: any) => {
       <div className="flex items-center space-x-4">
         <Link
           href={`${prefix}/contact`}
-          className="flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-400 px-6 py-2.5 font-medium text-white hover:shadow-lg hover:brightness-110 transition-all"
+          className="flex items-center justify-center rounded-full bg-gray-900 px-6 py-2.5 font-medium text-white hover:shadow-lg hover:bg-gray-800 transition-all"
         >
           {dict.nav.contact}
         </Link>
@@ -134,7 +134,7 @@ const MobileNav = ({ navItems, prefix, dict, locale }: any) => {
               ))}
               <Link
                 href={`${prefix}/contact`}
-                className="w-full rounded-full bg-gradient-to-br from-blue-600 to-blue-400 px-8 py-2.5 font-medium text-white hover:shadow-lg hover:brightness-110 transition-all text-center"
+                className="w-full rounded-full bg-gray-900 px-8 py-2.5 font-medium text-white hover:shadow-lg hover:bg-gray-800 transition-all text-center"
               >
                 {dict.nav.contact}
               </Link>

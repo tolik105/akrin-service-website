@@ -2,10 +2,61 @@ import { services } from "../../../constants/services";
 import React from "react";
 import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
+import { Metadata } from "next";
 
 function generateSlug(title: string): string {
+  // Map service titles to optimized SEO slugs
+  const seoSlugs: Record<string, string> = {
+    "24/7 Help-Desk (JP/EN)": "bilingual-helpdesk-support-247",
+    "Same-Day Onsite Response": "same-day-onsite-it-support",
+    "Multi-Layer Security Shield": "multi-layer-cybersecurity-protection",
+    "Bilingual IT Strategy": "bilingual-it-strategy-consulting-japan",
+    "Office Cabling & Wi-Fi Roll-outs": "enterprise-wifi-network-cabling",
+    "Lifecycle Equipment Management": "it-equipment-lifecycle-management",
+    "Preventive Maintenance Program": "proactive-it-maintenance-services",
+    "Enterprise Network Design": "enterprise-network-design-infrastructure",
+    "Japanese/English Support Desk": "bilingual-it-support-japan",
+    "Zero-Downtime Office Moves": "zero-downtime-office-relocation",
+    "Secure Data Destruction": "secure-data-destruction-compliance",
+    "Hardware Procurement & Setup": "hardware-procurement-setup-services",
+    "Legacy System Modernization": "legacy-system-modernization-upgrade",
+    "Hybrid-Cloud Migration": "hybrid-cloud-migration-services",
+    // Add more mappings for other services
+  };
+  
+  // If we have a custom SEO slug, use it
+  if (seoSlugs[title]) {
+    return seoSlugs[title];
+  }
+  
+  // Otherwise, fall back to the original slug generation logic
   return title.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
 }
+
+// Export metadata for SEO
+export const metadata: Metadata = {
+  title: 'ビジネス向けITサービス | バイリンガルサポート',
+  description: '国際企業と日本企業向けのバイリンガルサポート付き総合ITサービス。ネットワーク設計、セキュリティ、機器管理、24時間サポートを提供。',
+  openGraph: {
+    title: '日本語/英語対応のプロフェッショナルITサービス',
+    description: '日本でビジネスを展開する企業向けのマネージドITサービス、サイバーセキュリティ、インフラ設計、技術サポート。日本語と英語のバイリンガル対応。',
+    type: 'website',
+    locale: 'ja_JP',
+    siteName: 'Akrin ITサービス',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '日本でのビジネス向けITサービス',
+    description: '日本で事業を展開する企業向けの、日本語/英語バイリンガル対応の総合ITソリューション。',
+  },
+  keywords: 'ITサービス 日本, バイリンガルITサポート, 日本語英語ヘルプデスク, ネットワークインフラ 日本, マネージドITサービス 東京, サイバーセキュリティ 日本',
+  alternates: {
+    languages: {
+      'en': '/services',
+      'ja': '/ja/services',
+    },
+  },
+};
 
 export default function ServicesPageJa() {
   const dict = getDictionary('ja');

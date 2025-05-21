@@ -7,6 +7,31 @@ import Link from "next/link";
 
 // Helper function to generate slugs consistently
 function generateSlug(title: string): string {
+  // Map service titles to optimized SEO slugs
+  const seoSlugs: Record<string, string> = {
+    "24/7 Help-Desk (JP/EN)": "bilingual-helpdesk-support-247",
+    "Same-Day Onsite Response": "same-day-onsite-it-support",
+    "Multi-Layer Security Shield": "multi-layer-cybersecurity-protection",
+    "Bilingual IT Strategy": "bilingual-it-strategy-consulting-japan",
+    "Office Cabling & Wi-Fi Roll-outs": "enterprise-wifi-network-cabling",
+    "Lifecycle Equipment Management": "it-equipment-lifecycle-management",
+    "Preventive Maintenance Program": "proactive-it-maintenance-services",
+    "Enterprise Network Design": "enterprise-network-design-infrastructure",
+    "Japanese/English Support Desk": "bilingual-it-support-japan",
+    "Zero-Downtime Office Moves": "zero-downtime-office-relocation",
+    "Secure Data Destruction": "secure-data-destruction-compliance",
+    "Hardware Procurement & Setup": "hardware-procurement-setup-services",
+    "Legacy System Modernization": "legacy-system-modernization-upgrade",
+    "Hybrid-Cloud Migration": "hybrid-cloud-migration-services",
+    // Add more mappings for other services
+  };
+  
+  // If we have a custom SEO slug, use it
+  if (seoSlugs[title]) {
+    return seoSlugs[title];
+  }
+  
+  // Otherwise, fall back to the original slug generation logic
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
@@ -24,17 +49,17 @@ export const Services = ({ dict, locale }: { dict: any; locale: string }) => {
         <h2 className="text-3xl font-medium tracking-tight text-gray-900">
           {dict.services.heading}
         </h2>
-        <p className="mt-2 text-lg text-gray-600">
+        <p className="mt-2 text-base text-gray-600">
           {dict.services.subheading}
         </p>
       </div>
 
       {/* Display services grouped by category */}
       {categories.map((category) => (
-        <div key={category.id} className="mb-16">
+        <div key={category} className="mb-16">
           <div className="flex items-center mb-6">
             <h3 className="text-2xl font-medium tracking-tight text-gray-900 mr-4">
-              {category.name}
+              {category}
             </h3>
             <div className="flex-grow h-px bg-gray-200"></div>
           </div>
@@ -44,9 +69,9 @@ export const Services = ({ dict, locale }: { dict: any; locale: string }) => {
             className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2 md:gap-y-10 lg:grid-cols-3"
           >
             {services
-              .filter((service) => service.category === category.id)
-              .map((service, idx) => (
-                <Service key={`service-${category.id}-${idx}`} service={service} prefix={prefix} dict={dict} />
+              .filter((service) => service.category === category)
+              .map((service) => (
+                <Service key={`service-${service.id}`} service={service} prefix={prefix} dict={dict} />
               ))}
           </ul>
         </div>
@@ -65,20 +90,33 @@ const Service = ({ service, prefix, dict }: { service: any; prefix: string; dict
     mouseY.set(clientY - top);
   }
 
+  // Create a pattern object for consistency with existing pattern rendering
+  const pattern = {
+    y: 16,
+    squares: [
+      [0, 1],
+      [1, 3],
+    ],
+  };
+
   return (
     <li
       onMouseMove={onMouseMove}
       className="group rounded-2xl border border-gray-200 p-8 relative hover:border-gray-300 hover:shadow-sm transition-all duration-300"
     >
-      <ServicePattern {...service.pattern} mouseX={mouseX} mouseY={mouseY} />
+      <ServicePattern {...pattern} mouseX={mouseX} mouseY={mouseY} />
       <div className="relative z-10">
-        <span>{service.icon}</span>
+        <div className="h-8 w-8 text-gray-500 flex items-center justify-center">
+          <span className="text-lg font-bold">{service.id.charAt(0).toUpperCase()}</span>
+        </div>
         <h3 className="mt-6 font-semibold text-gray-900 tracking-wide leading-6 antialiased">
           {service.title}
         </h3>
-        <p className="mt-2 text-gray-700 tracking-wide leading-6 antialiased">
-          {service.description}
-        </p>
+        <p className="mt-2 text-gray-600">{service.summary}</p>
+        <div className="mt-4">
+          <div className="font-medium text-xs uppercase text-gray-500 mb-1">Outcome:</div>
+          <div className="text-sm font-medium text-gray-900">{service.outcome}</div>
+        </div>
         <div className="flex justify-center mt-6">
           <Link
             href={`${prefix}/services/${generateSlug(service.title)}`}

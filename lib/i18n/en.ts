@@ -25,7 +25,7 @@ const en = {
   services: {
     heading: 'IT Services That Solve Real Business Problems',
     subheading:
-      'Our bilingual team provides comprehensive IT solutions for global organizations operating in Japan.',
+      'We provide end-to-end IT support for businesses across Japan—from end-user computing and secure networking to on-site engineering and 24 / 7 bilingual help-desk—tailored to your exact needs so your team stays connected, protected, and running at peak efficiency.',
     learnMore: 'Learn More',
     pageHeading: 'Our Services',
     pageSubheading:

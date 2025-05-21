@@ -78,10 +78,10 @@ export function LogoCloudMarquee() {
   return (
     <div className="relative z-20 px-4 py-12 md:px-8 md:py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="bg-gradient-to-br from-blue-700 to-blue-500 bg-clip-text text-center font-sans text-2xl font-bold text-transparent md:text-4xl">
+        <h2 className="text-center font-sans text-2xl font-bold text-black md:text-4xl">
           Trusted Technology Partners
         </h2>
-        <div className="mx-auto w-24 h-1.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full mt-4"></div>
+        <div className="mx-auto w-24 h-1 bg-gray-800 rounded-full mt-4"></div>
         <p className="mt-6 text-center font-sans text-base text-zinc-700 max-w-2xl mx-auto">
           Akrin IT Services partners with industry leaders to deliver enterprise-grade solutions for global teams in Japan.
         </p>
@@ -97,7 +97,7 @@ export function LogoCloudMarquee() {
                     alt={logo.name}
                     width={140}
                     height={50}
-                    className="h-12 w-auto object-contain"
+                    className="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                     unoptimized={true}
                   />
                 </div>
@@ -115,7 +115,7 @@ export function LogoCloudMarquee() {
                     alt={logo.name}
                     width={140}
                     height={50}
-                    className="h-12 w-auto object-contain"
+                    className="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                     unoptimized={true}
                   />
                 </div>

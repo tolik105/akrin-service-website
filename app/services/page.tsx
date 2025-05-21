@@ -2,9 +2,60 @@ import { services } from "../../constants/services";
 import React from "react";
 import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
+import { Metadata } from "next";
+
+// Export metadata for SEO
+export const metadata: Metadata = {
+  title: 'IT Services for Businesses in Japan | Bilingual Support',
+  description: 'Comprehensive IT services with bilingual support for international and Japanese businesses. Network design, security, equipment management, and 24/7 support.',
+  openGraph: {
+    title: 'Professional IT Services with Japanese/English Support',
+    description: 'Managed IT services, cybersecurity, infrastructure design, and technical support for businesses in Japan. Bilingual expertise in Japanese and English.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Akrin IT Services',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'IT Services for Businesses in Japan',
+    description: 'Comprehensive IT solutions with bilingual Japanese/English support for businesses operating in Japan.',
+  },
+  keywords: 'IT services Japan, bilingual IT support, Japanese English helpdesk, network infrastructure Japan, managed IT services Tokyo, cybersecurity Japan',
+  alternates: {
+    languages: {
+      'en': '/services',
+      'ja': '/ja/services',
+    },
+  },
+};
 
 // Helper function to generate slugs consistently (same as in [slug]/page.tsx)
 function generateSlug(title: string): string {
+  // Map service titles to optimized SEO slugs
+  const seoSlugs: Record<string, string> = {
+    "24/7 Help-Desk (JP/EN)": "bilingual-helpdesk-support-247",
+    "Same-Day Onsite Response": "same-day-onsite-it-support",
+    "Multi-Layer Security Shield": "multi-layer-cybersecurity-protection",
+    "Bilingual IT Strategy": "bilingual-it-strategy-consulting-japan",
+    "Office Cabling & Wi-Fi Roll-outs": "enterprise-wifi-network-cabling",
+    "Lifecycle Equipment Management": "it-equipment-lifecycle-management",
+    "Preventive Maintenance Program": "proactive-it-maintenance-services",
+    "Enterprise Network Design": "enterprise-network-design-infrastructure",
+    "Japanese/English Support Desk": "bilingual-it-support-japan",
+    "Zero-Downtime Office Moves": "zero-downtime-office-relocation",
+    "Secure Data Destruction": "secure-data-destruction-compliance",
+    "Hardware Procurement & Setup": "hardware-procurement-setup-services",
+    "Legacy System Modernization": "legacy-system-modernization-upgrade",
+    "Hybrid-Cloud Migration": "hybrid-cloud-migration-services",
+    // Add more mappings for other services
+  };
+  
+  // If we have a custom SEO slug, use it
+  if (seoSlugs[title]) {
+    return seoSlugs[title];
+  }
+  
+  // Otherwise, fall back to the original slug generation logic
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")

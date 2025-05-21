@@ -22,8 +22,7 @@ const SolutionsPage: NextPage = () => {
           Enterprise-grade IT infrastructure solutions tailored to your business needs
           and designed for reliability.
         </p>
-
-        <Templates />
+        {/* Templates section removed as requested */}
       </div>
       {/* Testimonial removed for consistency */}
       <CallToAction headerText={`Need a customized IT solution? We are here!`} />

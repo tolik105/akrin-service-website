@@ -13,21 +13,7 @@ export default function Home() {
   return (
     <Container>
       <Hero dict={dict} />
-      {/* Testimonial removed for consistency */}
-      <div id="work" className=" max-w-6xl mx-auto antialiased">
-        <h2 className="font-bold text-4xl text-center text-slate-700 capitalize">
-          Recent{" "}
-          <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-pink-500 z-10">
-            Projects
-          </span>
-        </h2>
-        <p className="text-base text-slate-500 font-normal text-center max-w-2xl mx-auto my-4">
-          A look at some of the successful IT infrastructure implementations we've delivered for our clients.
-        </p>
-
-        <Products />
-      </div>
-      {/* Second testimonial removed for consistency */}
+      {/* Projects section removed as requested */}
       <Services dict={dict} locale="en" />
       <LogoCloudMarquee />
       <CallToAction
